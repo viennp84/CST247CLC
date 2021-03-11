@@ -47,7 +47,7 @@ namespace CST247CLC.Controllers
                 gameBoard.buttons.ElementAt(item).isVisited = 1;
             }
 
-            var buttonHTMLString = RenderRazorViewToString(this, "ShowOneButton", gameBoard.buttons.ElementAt(bN));
+            var buttonHTMLString = RenderRazorViewToString(this, "ShowOneButton", gameBoard.buttons);
 
             var messageHTMLString = "";
             if (gameBoard.buttons.ElementAt(bN).live == true)
@@ -58,6 +58,7 @@ namespace CST247CLC.Controllers
             {
                 messageHTMLString = "<p>KEEP PLAYING</p>";
             }
+            System.Diagnostics.Debug.WriteLine(buttonHTMLString);
 
             return Json(new { part1 = buttonHTMLString, part2 = messageHTMLString });
         }

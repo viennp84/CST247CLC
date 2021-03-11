@@ -32,17 +32,19 @@
 
 <p>Current time: @DateTime.Now</p>
 
+
 <form>
-    <div class="button-zone">
+    <div class="oneButton" id="board">
+        <div class="button-zone">
 
-        @for (int i = 0; i < Model.Count(); i++)
-        {
-
-            @if (i % Math.Sqrt(Model.Count()) == 0)
+            @for (int i = 0; i < Model.Count(); i++)
             {
-                <div class="line-break"></div>
-            }
-            <div class="oneButton" id=@i>
+
+                @if (i % Math.Sqrt(Model.Count()) == 0)
+                {
+                    <div class="line-break"></div>
+                }
+                //<div class="oneButton" id=@i>
                 <button class="game-button" type="submit" value="@Model.ElementAt(i).id" name="buttonNumber" asp-controller="Minesweeper" asp-action="HandleButtonClick">
 
                     @if (Model.ElementAt(i).isVisited == 1 && Model.ElementAt(i).live != true)
@@ -59,11 +61,13 @@
                     }
 
                 </button>
-            </div>
-                }
+                //</div>
+            }
 
-            </div>
+        </div>
+    </div>
 </form>
+
 <div id="messageArea">
     <p>KEEP PLAYING</p>
 </div>

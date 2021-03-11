@@ -38,7 +38,7 @@ function doButtonUpdate(buttonNumber, urlString) {
         },
         success: function (data) {
             console.log(data);
-            $("#" + buttonNumber).html(data.part1);
+            $("#board").html(data.part1);
             $("#messageArea").html(data.part2);
         }
     });
