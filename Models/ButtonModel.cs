@@ -17,10 +17,12 @@ namespace CST247CLC.Models
         public int isVisited { get; set; }
         public bool live { get; set; }
         public int neighbors { get; set; }
+        public bool flag { get; set; }
 
         public ButtonModel()
         {
             this.isVisited = 0;
+            this.flag = false;
         }
 
         public ButtonModel(int id, int row, int column, int visited, bool live, int neighbors)

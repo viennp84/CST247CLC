@@ -25,6 +25,7 @@ namespace CST247CLC.Models
         public List<ButtonModel> buttons { get; set; }
 
         public ButtonModel[,] grid { get; set; }
+        public int numOfBombs { get; set; }
 
         public GameBoard(int size)
         {
@@ -44,6 +45,10 @@ namespace CST247CLC.Models
                     grid[i, j] = new ButtonModel();
                     grid[i, j].id = index;
                     grid[i, j].live = IsBomb(gameLevel);
+                    if (grid[i, j].live)
+                    {
+                        numOfBombs++;
+                    }
                     grid[i, j].row = i;
                     grid[i, j].column = j;
                     index++;

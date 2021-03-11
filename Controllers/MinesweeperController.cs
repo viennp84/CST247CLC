@@ -39,6 +39,14 @@ namespace CST247CLC.Controllers
         public IActionResult ShowOneButton(int buttonNumber)
         {
             int bN = buttonNumber;
+
+            //if flag is true, dont do anything
+            if (gameBoard.buttons.ElementAt(bN).flag)
+            {
+                var part1 = RenderRazorViewToString(this, "ShowOneButton", gameBoard.buttons);
+                return Json(new { part1 = part1, part2 = "<p>KEEP PLAYING</p>" });
+            }
+
             gameBoard.buttons.ElementAt(bN).isVisited = 1;
 
             List<int> btns = gameBoard.GetChangedButton(gameBoard.buttons.ElementAt(bN).row, gameBoard.buttons.ElementAt(bN).column);
@@ -47,27 +55,52 @@ namespace CST247CLC.Controllers
                 gameBoard.buttons.ElementAt(item).isVisited = 1;
             }
 
-            var buttonHTMLString = RenderRazorViewToString(this, "ShowOneButton", gameBoard.buttons);
-
             var messageHTMLString = "";
             if (gameBoard.buttons.ElementAt(bN).live == true)
             {
+                for (int i = 0; i < gameBoard.buttons.Count; i++)
+                {
+                    gameBoard.buttons.ElementAt(i).isVisited = 1;
+                }
                 messageHTMLString = "<p>GAME OVER</p>";
             }
             else
             {
                 messageHTMLString = "<p>KEEP PLAYING</p>";
+
+                int count = 0;
+                for (int i = 0; i < gameBoard.buttons.Count; i++)
+                {
+                    if(gameBoard.buttons.ElementAt(i).isVisited == 1)
+                    {
+                        count++;
+                    }
+                }
+                if((gameBoard.buttons.Count - count) == gameBoard.numOfBombs)
+                {
+                    messageHTMLString = "<p>YOU WON! CONGRATULATIONS</p>";
+                }
             }
-            System.Diagnostics.Debug.WriteLine(buttonHTMLString);
+
+            var buttonHTMLString = RenderRazorViewToString(this, "ShowOneButton", gameBoard.buttons);
 
             return Json(new { part1 = buttonHTMLString, part2 = messageHTMLString });
         }
 
         public IActionResult RightClickShowOneButton(int buttonNumber)
         {
-            //gameBoard.buttons.ElementAt(buttonNumber). = 0;
+            if(gameBoard.buttons.ElementAt(buttonNumber).flag)
+            {
+                gameBoard.buttons.ElementAt(buttonNumber).flag = false;
+            }
+            else
+            {
+                gameBoard.buttons.ElementAt(buttonNumber).flag = true;
+            }
 
-            return PartialView("ShowOneButton", gameBoard.buttons.ElementAt(buttonNumber));
+            var buttonHTMLString = RenderRazorViewToString(this, "ShowOneButton", gameBoard.buttons);
+
+            return Json(new { part1 = buttonHTMLString, part2 = "KEEP PLAYING" });
         }
 
         public static string RenderRazorViewToString(Controller controller, string viewName, object model = null)
