@@ -217,7 +217,6 @@ C:\Users\vienn\source\repos\viennp84\CST247CLC\bin\Debug\netcoreapp3.1\runtimes\
 C:\Users\vienn\source\repos\viennp84\CST247CLC\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
 C:\Users\vienn\source\repos\viennp84\CST247CLC\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\vienn\source\repos\viennp84\CST247CLC\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
-C:\Users\vienn\source\repos\viennp84\CST247CLC\obj\Debug\netcoreapp3.1\CST247CLC.csprojAssemblyReference.cache
 C:\Users\vienn\source\repos\viennp84\CST247CLC\obj\Debug\netcoreapp3.1\CST247CLC.AssemblyInfoInputs.cache
 C:\Users\vienn\source\repos\viennp84\CST247CLC\obj\Debug\netcoreapp3.1\CST247CLC.AssemblyInfo.cs
 C:\Users\vienn\source\repos\viennp84\CST247CLC\obj\Debug\netcoreapp3.1\CST247CLC.RazorAssemblyInfo.cache

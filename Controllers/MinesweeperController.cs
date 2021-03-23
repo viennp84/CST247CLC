@@ -1,5 +1,6 @@
 ﻿using CST247CLC.Models;
 using CST247CLC.Services.Business;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
@@ -44,7 +45,8 @@ namespace CST247CLC.Controllers
         {
             JavaScriptSerializer js = new JavaScriptSerializer();
             var gameJson = js.Serialize(gameBoard);
-            GameStorageModel gameStorageModel = new GameStorageModel(2, new DateTime().ToString(), gameJson);
+            int userId = (int)HttpContext.Session.GetInt32("userId");
+            GameStorageModel gameStorageModel = new GameStorageModel(userId, new DateTime().ToString(), gameJson);
             mineSweeperService.insertGameRecord(gameStorageModel);
             return View("Index", gameBoard.buttons);
         }
