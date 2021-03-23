@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using CST247CLC.Models;
 using CST247CLC.Services.Business;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
+using Microsoft.AspNetCore.Http;
 
 namespace CST247CLC.Controllers
 {
@@ -18,7 +20,7 @@ namespace CST247CLC.Controllers
         public IActionResult Login(UserModel userModel)
         {
             bool isRegistered = false;
-
+            //var json = JsonSerializer.Serialize(userModel);
             UserBusinessService ubs = new UserBusinessService();
             isRegistered = ubs.loginUser(userModel);
             if (isRegistered)
