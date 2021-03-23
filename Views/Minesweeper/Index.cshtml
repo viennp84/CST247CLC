@@ -44,27 +44,27 @@
                 {
                     <div class="line-break"></div>
                 }
-                <button class="game-button" type="submit" value="@Model.ElementAt(i).id" name="buttonNumber" asp-controller="Minesweeper" asp-action="HandleButtonClick">
+        <button class="game-button" type="submit" value="@Model.ElementAt(i).id" name="buttonNumber" asp-controller="Minesweeper" asp-action="HandleButtonClick">
 
-                    @if (Model.ElementAt(i).isVisited == 1 && Model.ElementAt(i).live != true)
-                    {
-                        <img class="game-button-image" src="~/img/@imageNames[Model.ElementAt(i).neighbors]" />
-                    }
-                    else if (Model.ElementAt(i).isVisited == 0 && Model.ElementAt(i).flag == false)
-                    {
-                        <img class="game-button-image" src="~/img/@imageNames[10]" />
-                    }
-                    else if (Model.ElementAt(i).isVisited == 0 && Model.ElementAt(i).flag == true)
-                    {
-                        <img class="game-button-image" src="~/img/@imageNames[11]" />
-                    }
-                    else if (Model.ElementAt(i).live == true)
-                    {
-                        <img class="game-button-image" src="~/img/@imageNames[9]" />
-                    }
-                    
+            @if (Model.ElementAt(i).isVisited == 1 && Model.ElementAt(i).live != true)
+            {
+                <img class="game-button-image" src="~/img/@imageNames[Model.ElementAt(i).neighbors]" />
+            }
+            else if (Model.ElementAt(i).isVisited == 0 && Model.ElementAt(i).flag == false)
+            {
+                <img class="game-button-image" src="~/img/@imageNames[10]" />
+            }
+            else if (Model.ElementAt(i).isVisited == 0 && Model.ElementAt(i).flag == true)
+            {
+                <img class="game-button-image" src="~/img/@imageNames[11]" />
+            }
+            else if (Model.ElementAt(i).live == true)
+            {
+                <img class="game-button-image" src="~/img/@imageNames[9]" />
+            }
 
-                </button>
+
+        </button>
             }
 
         </div>
