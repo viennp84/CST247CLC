@@ -23,5 +23,6 @@ namespace CST247CLC.Models
 
         public string password { get; set; }
 
+       
     }
 }

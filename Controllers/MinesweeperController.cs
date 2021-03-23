@@ -1,12 +1,15 @@
 ﻿using CST247CLC.Models;
+using CST247CLC.Services.Business;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Nancy.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace CST247CLC.Controllers
@@ -14,6 +17,7 @@ namespace CST247CLC.Controllers
     public class MinesweeperController : Controller
     {
         static GameBoard gameBoard = new GameBoard(10);
+        MineSweeperService mineSweeperService = new MineSweeperService();
 
         public IActionResult Index()
         {
@@ -33,6 +37,21 @@ namespace CST247CLC.Controllers
                 gameBoard.buttons.ElementAt(item).isVisited = 1;
             }
 
+            return View("Index", gameBoard.buttons);
+        }
+
+        public IActionResult SaveGameClick()
+        {
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            var gameJson = js.Serialize(gameBoard);
+            GameStorageModel gameStorageModel = new GameStorageModel(2, new DateTime().ToString(), gameJson);
+            mineSweeperService.insertGameRecord(gameStorageModel);
+            return View("Index", gameBoard.buttons);
+        }
+
+        public IActionResult ShowSavedGamesClick()
+        {
+            List<GameStorageModel> gameList = mineSweeperService.loadAllRecord();
             return View("Index", gameBoard.buttons);
         }
 

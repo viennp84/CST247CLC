@@ -125,3 +125,10 @@ C:\Users\Adam\source\repos\CST247CLC\CST247CLC\obj\Debug\netcoreapp3.1\CST247CLC
 C:\Users\Adam\source\repos\CST247CLC\CST247CLC\obj\Debug\netcoreapp3.1\CST247CLC.genruntimeconfig.cache
 C:\Users\Adam\source\repos\CST247CLC\CST247CLC\obj\Debug\netcoreapp3.1\Razor\Views\Minesweeper\Index.cshtml.g.cs
 C:\Users\Adam\source\repos\CST247CLC\CST247CLC\obj\Debug\netcoreapp3.1\Razor\Views\Minesweeper\ShowOneButton.cshtml.g.cs
+C:\Users\Adam\source\repos\CST247CLC\CST247CLC\bin\Debug\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\Adam\source\repos\CST247CLC\CST247CLC\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Adam\source\repos\CST247CLC\CST247CLC\bin\Debug\netcoreapp3.1\Microsoft.Extensions.PlatformAbstractions.dll
+C:\Users\Adam\source\repos\CST247CLC\CST247CLC\bin\Debug\netcoreapp3.1\Nancy.dll
+C:\Users\Adam\source\repos\CST247CLC\CST247CLC\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+C:\Users\Adam\source\repos\CST247CLC\CST247CLC\bin\Debug\netcoreapp3.1\System.Web.Http.dll
+C:\Users\Adam\source\repos\CST247CLC\CST247CLC\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
