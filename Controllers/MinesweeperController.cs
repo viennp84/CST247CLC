@@ -1,5 +1,6 @@
 ﻿using CST247CLC.Models;
 using CST247CLC.Services.Business;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
@@ -44,15 +45,17 @@ namespace CST247CLC.Controllers
         {
             JavaScriptSerializer js = new JavaScriptSerializer();
             var gameJson = js.Serialize(gameBoard);
-            GameStorageModel gameStorageModel = new GameStorageModel(2, new DateTime().ToString(), gameJson);
+            int userId = (int)HttpContext.Session.GetInt32("userId");
+            GameStorageModel gameStorageModel = new GameStorageModel(userId, new DateTime().ToString(), gameJson);
             mineSweeperService.insertGameRecord(gameStorageModel);
             return View("Index", gameBoard.buttons);
         }
 
-        public IActionResult ShowSavedGamesClick()
+        public IActionResult ShowSavedGames()
         {
             List<GameStorageModel> gameList = mineSweeperService.loadAllRecord();
-            return View("Index", gameBoard.buttons);
+
+            return View("ShowSavedGames", gameList);
         }
 
         public IActionResult ShowOneButton(int buttonNumber)
@@ -90,12 +93,12 @@ namespace CST247CLC.Controllers
                 int count = 0;
                 for (int i = 0; i < gameBoard.buttons.Count; i++)
                 {
-                    if(gameBoard.buttons.ElementAt(i).isVisited == 1)
+                    if (gameBoard.buttons.ElementAt(i).isVisited == 1)
                     {
                         count++;
                     }
                 }
-                if((gameBoard.buttons.Count - count) == gameBoard.numOfBombs)
+                if ((gameBoard.buttons.Count - count) == gameBoard.numOfBombs)
                 {
                     messageHTMLString = "<p>YOU WON! CONGRATULATIONS</p>";
                 }
@@ -108,7 +111,7 @@ namespace CST247CLC.Controllers
 
         public IActionResult RightClickShowOneButton(int buttonNumber)
         {
-            if(gameBoard.buttons.ElementAt(buttonNumber).flag)
+            if (gameBoard.buttons.ElementAt(buttonNumber).flag)
             {
                 gameBoard.buttons.ElementAt(buttonNumber).flag = false;
             }

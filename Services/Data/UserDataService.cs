@@ -11,9 +11,9 @@ namespace CST247CLC.Services.Data
     {
         string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CST247CLC;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
-        public bool authenticate(UserModel user)
+        public int authenticate(UserModel user)
         {
-            bool success = false;
+            int ID = -1;
 
             string sqlStatement = "SELECT * FROM dbo.USERS WHERE USERNAME = @USERNAME and PASSWORD = @PASSWORD";
 
@@ -28,15 +28,17 @@ namespace CST247CLC.Services.Data
                 {
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();
-                    if (reader.HasRows)
-                        success = true;
+                    while (reader.Read())
+                    {
+                        ID = (int)reader[0];
+                    }
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
             }
-            return success;
+            return ID;
         }
 
         public bool createUser(UserModel user)

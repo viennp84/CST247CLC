@@ -12,7 +12,7 @@ namespace CST247CLC.Services.Business
         UserDataService uds = new UserDataService();
 
         //login method
-        public bool loginUser(UserModel user)
+        public int loginUser(UserModel user)
         {
             return uds.authenticate(user);
         }

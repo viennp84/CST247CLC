@@ -19,13 +19,14 @@ namespace CST247CLC.Controllers
         [HttpPost]
         public IActionResult Login(UserModel userModel)
         {
-            bool isRegistered = false;
+            int ID = -1;
             //var json = JsonSerializer.Serialize(userModel);
             UserBusinessService ubs = new UserBusinessService();
-            isRegistered = ubs.loginUser(userModel);
-            if (isRegistered)
+            ID = ubs.loginUser(userModel);
+            if (ID > 0)
             {
                 ViewBag.username = userModel.userName;
+                HttpContext.Session.SetInt32("userId", ID);
                 return View("Views/Login/LoginSuccess.cshtml");
             }
             else
