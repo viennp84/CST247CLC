@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<CST247CLC.Models.GameStorageModel>
+@using Microsoft.AspNetCore.Http;
 
 <table class="table">
     <thead>
@@ -16,22 +17,30 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.userId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.dateTime)
-            </td>
-            <td>
-                @Html.ActionLink("Load Game", "LoadGame", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.userId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dateTime)
+                </td>
+                @if (Context.Session.GetInt32("userId") == item.userId)
+                {
+                    <td>
+                        @Html.ActionLink("Load Game", "LoadGame", new { /* id=item.PrimaryKey */ }) |
+                        <form asp-controller="Minesweeper" asp-action="DeleteGame">
+                            <input type="hidden" name="Id" id="Id" value="@item.id" class="form-control" />
+                            <input type="submit" value="Delete" class="btn btn-primary" />
+                        </form>
+                    </td>
+                }
+                
+            </tr>
+        }
     </tbody>
 </table>

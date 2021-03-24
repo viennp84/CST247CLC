@@ -58,6 +58,13 @@ namespace CST247CLC.Controllers
             return View("ShowSavedGames", gameList);
         }
 
+        public IActionResult DeleteGame(int Id)
+        {
+            mineSweeperService.removeGameRecord(Id);
+
+            return ShowSavedGames();
+        }
+
         public IActionResult ShowOneButton(int buttonNumber)
         {
             int bN = buttonNumber;
