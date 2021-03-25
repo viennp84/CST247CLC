@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Nancy.Json;
+using Nancy.Json.Simple;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,6 +19,7 @@ namespace CST247CLC.Controllers
     public class MinesweeperController : Controller
     {
         static GameBoard gameBoard = new GameBoard(10);
+
         MineSweeperService mineSweeperService = new MineSweeperService();
 
         public IActionResult Index()
@@ -46,8 +48,42 @@ namespace CST247CLC.Controllers
             JavaScriptSerializer js = new JavaScriptSerializer();
             var gameJson = js.Serialize(gameBoard);
             int userId = (int)HttpContext.Session.GetInt32("userId");
-            GameStorageModel gameStorageModel = new GameStorageModel(userId, new DateTime().ToString(), gameJson);
+            DateTime current = DateTime.Now;
+            GameStorageModel gameStorageModel = new GameStorageModel(userId, current.ToString(), gameJson);
             mineSweeperService.insertGameRecord(gameStorageModel);
+            return View("Index", gameBoard.buttons);
+        }
+
+        public IActionResult LoadGameClick(string jsonString)
+        {
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            dynamic gsm = js.DeserializeObject(jsonString);
+
+            List<ButtonModel> btns = new List<ButtonModel>();
+            //JsonArray jsonarray = gsm.buttons;
+
+            for (int i = 0; i < gsm.buttons.Count; i++)
+            {
+                gameBoard.buttons.Add(new ButtonModel((int)gsm.buttons[i].id, (int)gsm.buttons[i].row, (int)gsm.buttons[i].column, (int)gsm.buttons[i].isVisited,(bool) gsm.buttons[i].live, (int)gsm.buttons[i].neighbors) );
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                for(int j = 0; j < 10; j++)
+                {
+                    gameBoard.grid[i, j].id = (int)gsm.grid[i, j].id;
+                    gameBoard.grid[i, j].row = (int)gsm.grid[i, j].row;
+                    gameBoard.grid[i, j].column = (int)gsm.grid[i, j].column;
+                    gameBoard.grid[i, j].isVisited = (int)gsm.grid[i, j].isVisited;
+                    gameBoard.grid[i, j].live = (bool)gsm.grid[i, j].live;
+                    gameBoard.grid[i, j].neighbors = (int)gsm.grid[i, j].neighbors;
+                }
+
+            }
+            gameBoard.numOfBombs = (int)gsm.numOfBombs;
+            gameBoard.size = (int)gsm.size;
+            gameBoard.gameLevel = (int)gsm.gameLevel;
+           
+            //gameBoard.buttons = (List<ButtonModel>)btns;
             return View("Index", gameBoard.buttons);
         }
 

@@ -27,6 +27,11 @@ namespace CST247CLC.Models
         public ButtonModel[,] grid { get; set; }
         public int numOfBombs { get; set; }
 
+        public GameBoard()
+        {
+            
+        }
+
         public GameBoard(int size)
         {
             //Initiate the gamboard properties

@@ -12,6 +12,10 @@ namespace CST247CLC.Models
         public string dateTime { get; set; }
         public string gameBoard { get; set; }
 
+        public GameStorageModel()
+        {
+            gameBoard = "";
+        }
         public GameStorageModel(int userId, string dateTime, string gameBoard)
         {
             this.userId = userId;

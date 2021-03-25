@@ -32,7 +32,11 @@
                 @if (Context.Session.GetInt32("userId") == item.userId)
                 {
                     <td>
-                        @Html.ActionLink("Load Game", "LoadGame", new { /* id=item.PrimaryKey */ }) |
+                        <form asp-controller="Minesweeper" asp-action="LoadGameClick">
+                            <input type="hidden" name="jsonString" id="jsonString" value="@item.gameBoard" class="form-control" />
+                            <input type="submit" value="Load Game" class="btn btn-primary" />
+                        </form>
+
                         <form asp-controller="Minesweeper" asp-action="DeleteGame">
                             <input type="hidden" name="Id" id="Id" value="@item.id" class="form-control" />
                             <input type="submit" value="Delete" class="btn btn-primary" />
