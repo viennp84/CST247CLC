@@ -64,24 +64,31 @@ namespace CST247CLC.Controllers
 
             for (int i = 0; i < gsm.buttons.Count; i++)
             {
-                gameBoard.buttons.Add(new ButtonModel((int)gsm.buttons[i].id, (int)gsm.buttons[i].row, (int)gsm.buttons[i].column, (int)gsm.buttons[i].isVisited,(bool) gsm.buttons[i].live, (int)gsm.buttons[i].neighbors) );
+                btns.Add(new ButtonModel((int)gsm.buttons[i].id, (int)gsm.buttons[i].row, (int)gsm.buttons[i].column, (int)gsm.buttons[i].isVisited,(bool) gsm.buttons[i].live, (int)gsm.buttons[i].neighbors) );
             }
+            ButtonModel[,] grid = new ButtonModel[10, 10];
+            int count = 0;
             for (int i = 0; i < 10; i++)
             {
                 for(int j = 0; j < 10; j++)
                 {
-                    gameBoard.grid[i, j].id = (int)gsm.grid[i, j].id;
-                    gameBoard.grid[i, j].row = (int)gsm.grid[i, j].row;
-                    gameBoard.grid[i, j].column = (int)gsm.grid[i, j].column;
-                    gameBoard.grid[i, j].isVisited = (int)gsm.grid[i, j].isVisited;
-                    gameBoard.grid[i, j].live = (bool)gsm.grid[i, j].live;
-                    gameBoard.grid[i, j].neighbors = (int)gsm.grid[i, j].neighbors;
+                    grid[i, j] = new ButtonModel();
+                    grid[i, j].id = (int)gsm.grid[count].id;
+                    grid[i, j].row = (int)gsm.grid[count].row;
+                    grid[i, j].column = (int)gsm.grid[count].column;
+                    grid[i, j].isVisited = (int)gsm.grid[count].isVisited;
+                    grid[i, j].live = (bool)gsm.grid[count].live;
+                    grid[i, j].neighbors = (int)gsm.grid[count].neighbors;
+
+                    count++;
                 }
 
             }
             gameBoard.numOfBombs = (int)gsm.numOfBombs;
             gameBoard.size = (int)gsm.size;
             gameBoard.gameLevel = (int)gsm.gameLevel;
+            gameBoard.buttons = btns;
+            gameBoard.grid = grid;
            
             //gameBoard.buttons = (List<ButtonModel>)btns;
             return View("Index", gameBoard.buttons);
